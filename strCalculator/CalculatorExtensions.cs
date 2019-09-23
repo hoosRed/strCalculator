@@ -11,19 +11,23 @@ namespace strCalculator
         {
             List<string> standardDelimiters = new List<string> { ",", "\n" };
 
-            // first character is always a new delimiter
-            var userDelimiter = str[0];
-            if(Char.IsNumber(userDelimiter))
+            // single character delimiter
+            var singleCharDelimiter = str[0];
+            if(!Char.IsNumber(singleCharDelimiter))
             {
-                return standardDelimiters.ToArray();    
-            }
-            else
-            {
-                standardDelimiters.Add(userDelimiter.ToString());
+                standardDelimiters.Add(singleCharDelimiter.ToString());    
             }
 
+            // custom delimiter inside []
+            var customDelimiter = Regex.Matches(str, @"(?<=\[).+?(?=\])")
+                .Cast<Match>()
+                .Select(m => m.Groups[0].Value)
+                .ToList();
 
-            return standardDelimiters.ToArray();
+            // add custom delimiters to list
+            var allDelimiters = standardDelimiters.Concat(customDelimiter).ToArray();
+
+            return allDelimiters;
         }
     }
 }
