@@ -16,6 +16,9 @@ namespace strCalculator
         /// <param name="input">Input string</param>
         public string Execute(string input)
         {
+            // max allowable value
+            int maxValue = 1000;
+
             // add support for newline as delimiter
             var delimiters = new string[] { ",", "\n" };
 
@@ -29,7 +32,7 @@ namespace strCalculator
                 int number;
                 bool isValidNumber = Int32.TryParse(str, out number);
 
-                if (isValidNumber && (number >= 0))
+                if (isValidNumber && (number >= 0) && number < maxValue)
                 {
                     positiveNumbers.Add(number);
                 }

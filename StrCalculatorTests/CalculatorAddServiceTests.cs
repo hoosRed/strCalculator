@@ -13,10 +13,10 @@ namespace StrCalculatorTests
         /// <param name="expectedOutput">Expected output</param>
         [Theory]
         [InlineData("20", "20")]
-        [InlineData("5000,1", "5001")]
         [InlineData("5,tytyt", "5")]
         [InlineData("1,2,3,4,5,6,7,8,9,10,11,12", "78")]
         [InlineData("1\n2,3", "6")]
+        [InlineData("2,1001,6", "8")]
         public void CalculatorAddTest(string inputString, string expectedOutput)
         {
             // Arrange 
