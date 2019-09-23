@@ -19,9 +19,10 @@ namespace StrCalculatorTests
         [InlineData("2,1001,6", "8")]
         [InlineData(";\n2;5", "7")]
         [InlineData("[***]\n11***22***33", "66")]
+        [InlineData("[*][!!][r9r]\n11r9r22*33!!44", "110")]
         public void CalculatorAddTest(string inputString, string expectedOutput)
         {
-            // Arrange 
+            // Arrange [*][!!][r9r]\n11r9r22*33!!44
             var calculatorAddService = new CalculatorAddService();
 
             // Act
