@@ -15,13 +15,6 @@ namespace strCalculator
         {
             var strArray = input.Split(",");
 
-            // only support two values
-            if (strArray.Length > 2)
-            {
-                Console.WriteLine("Input string is too long");
-                return "";
-            }
-
             var sum = 0;
             foreach (var str in strArray)
             {
