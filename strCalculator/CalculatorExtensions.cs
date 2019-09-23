@@ -24,7 +24,7 @@ namespace strCalculator
                 .Select(m => m.Groups[0].Value)
                 .ToList();
 
-            // input string should split on [d] in addition to d
+            // input string should split on "[*]" in addition to "*"
             var additionalDelimiters = new List<string>();
             foreach (var d in customDelimiters)
             {

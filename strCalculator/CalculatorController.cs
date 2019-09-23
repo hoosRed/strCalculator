@@ -18,6 +18,7 @@ namespace strCalculator
         {
             bool finished = false;
 
+            // Stretch 2: Process entries until Ctrl + C
             do
             {
                 _consoleInterface.Write("Welcome to String Calculator ");
