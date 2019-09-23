@@ -22,7 +22,10 @@ namespace strCalculator
             // build array of all delimiters
             var delimiters = input.GetDelimiters();
 
-            var strArray = input.Split(delimiters, StringSplitOptions.None);
+            // input string excluding delimiters
+            var strArray = input
+                .Split(delimiters, StringSplitOptions.None)
+                .Where(c => !String.IsNullOrWhiteSpace(c));
 
             var positiveNumbers = new List<int>();
             var negativeNumbers = new List<int>();
@@ -57,7 +60,19 @@ namespace strCalculator
                 throw e;
             }
 
-            return positiveNumbers.Sum().ToString();
+            return BuildEquation(positiveNumbers);
+        }
+
+        /// <summary>
+        ///     Prints equation 
+        /// </summary>
+        /// <returns>The equation</returns>
+        /// <param name="numbers">Positive numbers parsed from string</param>
+        private string BuildEquation(List<int> numbers)
+        {
+            var equation = string.Join("+", numbers);
+
+            return equation + " = " + numbers.Sum();
         }
     }
 }

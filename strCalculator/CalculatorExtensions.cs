@@ -13,19 +13,26 @@ namespace strCalculator
 
             // single character delimiter
             var singleCharDelimiter = str[0];
-            if(!Char.IsNumber(singleCharDelimiter))
+            if(!Char.IsNumber(singleCharDelimiter) && singleCharDelimiter != '[')
             {
                 standardDelimiters.Add(singleCharDelimiter.ToString());    
             }
 
             // custom delimiter inside []
-            var customDelimiter = Regex.Matches(str, @"(?<=\[).+?(?=\])")
+            var customDelimiters = Regex.Matches(str, @"(?<=\[).+?(?=\])")
                 .Cast<Match>()
                 .Select(m => m.Groups[0].Value)
                 .ToList();
 
-            // add custom delimiters to list
-            var allDelimiters = standardDelimiters.Concat(customDelimiter).ToArray();
+            // input string should split on [d] in addition to d
+            var additionalDelimiters = new List<string>();
+            foreach (var d in customDelimiters)
+            {
+                additionalDelimiters.Add("[" + d + "]");    
+            }
+
+            // Concatenate all 3 delimiter lists
+            var allDelimiters = standardDelimiters.Concat(customDelimiters.Concat(additionalDelimiters)).ToArray();
 
             return allDelimiters;
         }
