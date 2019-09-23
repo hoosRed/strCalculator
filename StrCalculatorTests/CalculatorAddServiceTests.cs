@@ -28,5 +28,23 @@ namespace StrCalculatorTests
             // Assert
             Assert.Equal(expectedOutput, actualOutput);
         }
+
+        /// <summary>
+        ///     Test that exception is thrown for negative numbers
+        /// </summary>
+        [Theory]
+        [InlineData("-1,0,1", "-1")]
+        [InlineData("-1,-2,1", "-1, -2")]
+        public void FormatExceptionTest(string invalidInput, string negativeNumbers)
+        {
+            // Arrange
+            var calculatorAddService = new CalculatorAddService();
+
+            // Act
+            var mockException = Assert.Throws<FormatException>(() => calculatorAddService.Execute(invalidInput));
+
+            // Assert
+            Assert.Equal("Negative numbers are invalid: " + negativeNumbers, mockException.Message);
+        }
     }
 }

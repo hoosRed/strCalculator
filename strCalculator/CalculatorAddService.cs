@@ -1,4 +1,7 @@
 ﻿using System;
+using System.Collections.Generic;
+using System.Linq;
+
 namespace strCalculator
 {
     /// <summary>
@@ -18,23 +21,40 @@ namespace strCalculator
 
             var strArray = input.Split(delimiters, StringSplitOptions.None);
 
-            var sum = 0;
+            var positiveNumbers = new List<int>();
+            var negativeNumbers = new List<int>();
+
             foreach (var str in strArray)
             {
                 int number;
                 bool isValidNumber = Int32.TryParse(str, out number);
 
-                if (isValidNumber)
+                if (isValidNumber && (number >= 0))
                 {
-                    sum += number;
+                    positiveNumbers.Add(number);
+                }
+                else if (isValidNumber && number < 0)
+                {
+                    // populate list of negative numbers
+                    negativeNumbers.Add(number);
                 }
                 else
                 {
-                    // invalid input    
+                    // parse failed - add placeholder
+                    positiveNumbers.Add(0);
                 }
             }
 
-            return sum.ToString();
+            // throw exception if negative numbers exist
+            if (negativeNumbers.Count > 0)
+            {
+                var numString = string.Join(", ", negativeNumbers);
+
+                FormatException e = new FormatException("Negative numbers are invalid: " + numString);
+                throw e;
+            }
+
+            return positiveNumbers.Sum().ToString();
         }
     }
 }
