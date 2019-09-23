@@ -19,8 +19,8 @@ namespace strCalculator
             // max allowable value
             int maxValue = 1000;
 
-            // add support for newline as delimiter
-            var delimiters = new string[] { ",", "\n" };
+            // build array of all delimiters
+            var delimiters = input.GetDelimiters();
 
             var strArray = input.Split(delimiters, StringSplitOptions.None);
 
