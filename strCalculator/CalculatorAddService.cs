@@ -14,11 +14,8 @@ namespace strCalculator
         /// </summary>
         /// <returns>String containing sum of input string</returns>
         /// <param name="input">Input string</param>
-        public string Execute(string input)
+        public string Execute(string input, bool includeNegatives = false, int maxValue = 1000)
         {
-            // max allowable value
-            int maxValue = 1000;
-
             // build array of all delimiters
             var delimiters = input.GetDelimiters();
 
@@ -35,7 +32,7 @@ namespace strCalculator
                 int number;
                 bool isValidNumber = Int32.TryParse(str, out number);
 
-                if (isValidNumber && (number >= 0) && number < maxValue)
+                if (isValidNumber && (number >= 0 || includeNegatives) && number < maxValue)
                 {
                     positiveNumbers.Add(number);
                 }

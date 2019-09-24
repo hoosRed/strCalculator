@@ -51,5 +51,25 @@ namespace StrCalculatorTests
             // Assert
             Assert.Equal("Negative numbers are invalid: " + negativeNumbers, mockException.Message);
         }
+
+        /// <summary>
+        ///     Testing inclusion of Max Value and negative number parameters
+        /// </summary>
+        /// <param name="inputString">Input string</param>
+        /// <param name="expectedOutput">Expected output</param>
+        [Theory]
+        [InlineData("2000,-2", "2000+-2 = 1998")]
+        [InlineData("6000,-2", "0+-2 = -2")]
+        public void CalculatorAddNegativeTest(string inputString, string expectedOutput)
+        {
+            // Arrange 
+            var calculatorAddService = new CalculatorAddService();
+
+            // Act - pass in optional parameters for negatives and max value
+            var actualOutput = calculatorAddService.Execute(inputString, true, 5000);
+
+            // Assert
+            Assert.Equal(expectedOutput, actualOutput);
+        }
     }
 }
