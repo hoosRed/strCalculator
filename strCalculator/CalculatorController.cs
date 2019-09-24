@@ -6,6 +6,11 @@ namespace strCalculator
         private IConsoleInterface _consoleInterface;
         private ICalculatorAddService _addService;
 
+        /// <summary>
+        ///     Constructor injects Console Interface and Calculator Add Service
+        /// </summary>
+        /// <param name="consoleInterface">Console interface</param>
+        /// <param name="addService">Add service</param>
         public CalculatorController(
             IConsoleInterface consoleInterface,
             ICalculatorAddService addService)
