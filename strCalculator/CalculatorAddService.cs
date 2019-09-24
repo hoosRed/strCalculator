@@ -7,7 +7,7 @@ namespace strCalculator
     /// <summary>
     ///     Calculator Add Service
     /// </summary>
-    public class CalculatorAddService : MathService, ICalculatorAddService
+    public class CalculatorAddService : BaseMathService, ICalculatorAddService
     {
         /// <summary>
         ///     Execute Addition

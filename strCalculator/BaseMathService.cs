@@ -6,7 +6,7 @@ namespace strCalculator
     /// <summary>
     ///     Abstract class for all Mathematical Operations
     /// </summary>
-    public abstract class MathService
+    public abstract class BaseMathService
     {
         /// <summary>
         ///     Build list of Valid numbers. 

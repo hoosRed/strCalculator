@@ -7,7 +7,7 @@ namespace strCalculator
     /// <summary>
     ///     Calculator multiply service.
     /// </summary>
-    public class CalculatorMultiplyService : MathService, ICalculatorMultiplyService
+    public class CalculatorMultiplyService : BaseMathService, ICalculatorMultiplyService
     {
         public string Execute(string input, bool includeNegatives = false, int maxValue = 1000)
         {
@@ -21,7 +21,6 @@ namespace strCalculator
 
             return BuildEquation(validNumbers);
         }
-
 
         /// <summary>
         ///     Prints equation 
