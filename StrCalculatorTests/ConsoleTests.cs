@@ -9,19 +9,22 @@ namespace StrCalculatorTests
         [Theory]
         [InlineData(new string[] { "Add", "1,2,3" }, "1+2+3 = 6")]
         [InlineData(new string[] { "Add", "2,4,rrrr,1001,6" }, "2+4+0+0+6 = 12")]
-        public void CalculatorUIAddTest(string[] uiCommands, string expectedSum)
+        [InlineData(new string[] { "Multiply", "2,4,rrrr,6" }, "2*4*6 = 48")]
+        public void CalculatorUIAddTest(string[] uiCommands, string expectedOutput)
         {
             // Arrange 
             var consoleInterface = new FakeConsoleInterface(uiCommands);
-            var calculatorAddService = new CalculatorAddService();
 
-            var calculatorUI = new CalculatorController(consoleInterface, calculatorAddService);
+            var calculatorUI = new CalculatorController(
+                consoleInterface, 
+                new CalculatorAddService(), 
+                new CalculatorMultiplyService());
 
             // Act
             calculatorUI.Run();
 
             // Assert
-            Assert.Contains(expectedSum, consoleInterface.Output);
+            Assert.Contains(expectedOutput, consoleInterface.Output);
         }
     }
 }

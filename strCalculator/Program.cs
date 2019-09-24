@@ -19,7 +19,7 @@ namespace strCalculator
         }
         public void WriteLine(Object o)
         {
-            Console.WriteLine(o.ToString());
+            Console.WriteLine(o);
         }
     }
 
@@ -29,7 +29,8 @@ namespace strCalculator
         {
             var calculator = new CalculatorController(
                 new ConsoleInterface(),
-                new CalculatorAddService());
+                new CalculatorAddService(),
+                new CalculatorMultiplyService());
 
             calculator.Run();
         }

@@ -7,18 +7,25 @@ namespace strCalculator
 {
     public static class CalculatorExtensions
     {
+        /// <summary>
+        ///     Parse input string for delimiters
+        /// </summary>
+        /// <returns>The delimiters.</returns>
+        /// <param name="str">input string</param>
         public static string[] GetDelimiters(this String str)
         {
             List<string> standardDelimiters = new List<string> { ",", "\n" };
 
             // single character delimiter
             var singleCharDelimiter = str[0];
-            if(!Char.IsNumber(singleCharDelimiter) && singleCharDelimiter != '[')
+            if(!Char.IsNumber(singleCharDelimiter) 
+               && singleCharDelimiter != '[' 
+               && singleCharDelimiter != '-')
             {
                 standardDelimiters.Add(singleCharDelimiter.ToString());    
             }
 
-            // custom delimiter inside []
+            // Regex extracts custom delimiters inside []
             var customDelimiters = Regex.Matches(str, @"(?<=\[).+?(?=\])")
                 .Cast<Match>()
                 .Select(m => m.Groups[0].Value)

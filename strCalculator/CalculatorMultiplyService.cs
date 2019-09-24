@@ -5,21 +5,14 @@ using System.Linq;
 namespace strCalculator
 {
     /// <summary>
-    ///     Calculator Add Service
+    ///     Calculator multiply service.
     /// </summary>
-    public class CalculatorAddService : MathService, ICalculatorAddService
+    public class CalculatorMultiplyService : MathService, ICalculatorMultiplyService
     {
-        /// <summary>
-        ///     Execute Addition
-        /// </summary>
-        /// <returns>String containing sum of input string</returns>
-        /// <param name="input">Input string</param>
         public string Execute(string input, bool includeNegatives = false, int maxValue = 1000)
         {
-            // build array of all delimiters
             var delimiters = input.GetDelimiters();
 
-            // input string excluding delimiters
             var strArray = input
                 .Split(delimiters, StringSplitOptions.None)
                 .Where(c => !String.IsNullOrWhiteSpace(c));
@@ -29,16 +22,26 @@ namespace strCalculator
             return BuildEquation(validNumbers);
         }
 
+
         /// <summary>
         ///     Prints equation 
         /// </summary>
         /// <returns>The equation</returns>
-        /// <param name="numbers">Valid numbers parsed from string</param>
+        /// <param name="numbers">Positive numbers parsed from string</param>
         private string BuildEquation(List<int> numbers)
         {
-            var equation = string.Join("+", numbers);
+            // build equation string
+            var nonZeroNumbers = numbers.Where(n => n != 0);
+            var equation = string.Join("*", nonZeroNumbers);
 
-            return equation + " = " + numbers.Sum();
+            // conduct muliplication
+            var product = 1;
+
+            foreach (var num in nonZeroNumbers)
+            {
+                product *= num;
+            }
+            return equation + " = " + product;
         }
     }
 }

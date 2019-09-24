@@ -38,8 +38,8 @@ namespace StrCalculatorTests
         ///     Test that exception is thrown for negative numbers
         /// </summary>
         [Theory]
-        [InlineData(";-1,0,1", "-1")]
-        [InlineData(";-1,-2,1", "-1, -2")]
+        [InlineData("-1,0,1", "-1")]
+        [InlineData("-1,-2,1", "-1, -2")]
         public void FormatExceptionTest(string invalidInput, string negativeNumbers)
         {
             // Arrange
